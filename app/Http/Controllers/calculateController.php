@@ -14,28 +14,19 @@ class calculateController extends Controller
         $score = HTTP::get('https://api.jikan.moe/v4/anime?q='.''.$nameAnime);
         $array = $score->json();
         $scoreCount = 0;
-        $i = 0;
         foreach($array['data'] as $data){
             $i++;
             $scoreCount= $scoreCount + $data['score'];
+            $title[$i] = $data['title'];
+                $jpg = $data['images'];
+                $jpg2 = $jpg['jpg'];
+                $img_url[$i] = $jpg2['image_url'];
             if($data['score']<=4){
                 $message[$i] = "I do not recommend it";
-                $title[$i] = $data['title'];
-                $jpg = $data['images'];
-                $jpg2 = $jpg['jpg'];
-                $img_url[$i] = $jpg2['image_url'];
             }elseif($data['score']>=5 && $data['score']<=7){
-                $title[$i] = $data['title'];
                 $message[$i] = "You may have fun";
-                $jpg = $data['images'];
-                $jpg2 = $jpg['jpg'];
-                $img_url[$i] = $jpg2['image_url'];
             }else{
-                $title[$i] = $data['title'];
                 $message[$i] = "Great, this is one of the best anime";
-                $jpg = $data['images'];
-                $jpg2 = $jpg['jpg'];
-                $img_url[$i] = $jpg2['image_url'];
             }
         }
         $lenght = count($array['data']);

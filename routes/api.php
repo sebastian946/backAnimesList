@@ -14,10 +14,5 @@ use App\Http\Controllers\calculateController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::get('/average/{score}/{count}',[calculateController::class,'calculate']);
-Route::get('/getScore/{nameAnime}',[calculateController::class,'getAnimeScore']);
 Route::get('/evaluateScore/{nameAnime}',[calculateController::class,'evaluateScore']);
